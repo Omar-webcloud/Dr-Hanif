@@ -242,7 +242,7 @@ export default function ContactPage() {
                 </h2>
               </div>
 
-              <form onSubmit={handleSubmit} noValidate>
+              <form onSubmit={handleSubmit}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                   <div className="form-grid-2">
                     <div className="form-field">
@@ -322,11 +322,11 @@ export default function ContactPage() {
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                     <p style={{ fontSize: '0.76rem', color: 'var(--body-grey)' }}>
-                      Clicking Send will open your email app with this message pre-filled.
+                      Submitting opens your default email client addressed to <strong>miahhanif@yahoo.com</strong> with your inputs pre-filled.
                     </p>
                     <button type="submit" className="btn btn-primary btn-lg">
                       <Send size={15} aria-hidden="true" />
-                      Open Email App
+                      Send via Email App
                     </button>
                   </div>
                 </div>
