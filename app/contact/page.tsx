@@ -107,15 +107,7 @@ export default function ContactPage() {
           CONTACT GRID
           ==================================================================== */}
       <section className="section section--white" aria-label="Contact information and inquiry form">
-        <div
-          className="container"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '64px',
-            alignItems: 'start',
-          }}
-        >
+        <div className="container contact-page-grid">
           {/* Info sidebar */}
           <aside aria-label="Contact information">
             <p className="t-eyebrow t-eyebrow--muted" style={{ marginBottom: '24px' }}>

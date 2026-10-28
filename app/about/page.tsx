@@ -83,7 +83,7 @@ export default function AboutPage() {
           ==================================================================== */}
       <section className="section section--white" id="biography" aria-labelledby="bio-heading">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '64px', alignItems: 'start' }}>
+          <div className="about-bio-grid">
             {/* Bio */}
             <div>
               <p className="t-eyebrow">Biographical Narrative</p>
@@ -104,15 +104,7 @@ export default function AboutPage() {
             </div>
 
             {/* Profile card */}
-            <div
-              style={{
-                background: 'var(--chalk)',
-                border: '1px solid var(--mist)',
-                padding: '32px',
-                position: 'sticky',
-                top: 'calc(var(--nav-height) + 20px)',
-              }}
-            >
+            <div className="about-card">
               {/* Portrait */}
               <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '24px', paddingBottom: '24px', borderBottom: '1px solid var(--mist)' }}>
                 <img
@@ -172,7 +164,7 @@ export default function AboutPage() {
             Academic Journey & Degrees
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '64px' }}>
+          <div className="split-grid-2">
             {/* Timeline */}
             <div className="edu-timeline">
               {facultyData.education.map((edu, i) => (
@@ -203,14 +195,7 @@ export default function AboutPage() {
               <p className="t-eyebrow t-eyebrow--muted" style={{ marginBottom: '20px' }}>
                 Academic Record Summary
               </p>
-              <div
-                style={{
-                  background: 'var(--charcoal)',
-                  color: 'var(--chalk)',
-                  padding: '32px',
-                  marginBottom: '24px',
-                }}
-              >
+              <div className="about-credentials-card">
                 <div style={{ fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--cobalt)', marginBottom: '20px' }}>
                   Verified Academic Credentials
                 </div>
@@ -245,8 +230,8 @@ export default function AboutPage() {
           ==================================================================== */}
       <section className="section section--white" id="methodologies" aria-labelledby="methods-heading">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '48px 0', alignItems: 'start' }}>
-            <div style={{ paddingRight: '48px' }}>
+          <div className="methods-split-grid">
+            <div className="methods-lead-col">
               <p className="t-eyebrow">Research Expertise</p>
               <h2 id="methods-heading" className="t-h2" style={{ marginBottom: '20px' }}>
                 Qualitative &amp; Participatory<br />Methodologies
@@ -256,7 +241,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div style={{ borderLeft: '1px solid var(--mist)', paddingLeft: '48px' }}>
+            <div className="methods-list-col">
               {facultyData.researchMethods.map((m, i) => (
                 <div key={m.name} className="about-method" style={{ borderTop: i === 0 ? '1px solid var(--mist)' : 'none' }}>
                   <span className="about-method-num">0{i + 1}</span>

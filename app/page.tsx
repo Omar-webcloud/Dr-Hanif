@@ -231,7 +231,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px 64px' }}>
+          <div className="split-grid-2">
             {/* Peer-reviewed */}
             <div>
               <div className="pub-section-heading">
