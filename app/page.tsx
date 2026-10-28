@@ -1,174 +1,325 @@
 'use client'
 
+import Link from 'next/link'
+import { facultyData } from '@/lib/data'
 import {
-  Button,
-  Column,
-  Grid,
-  Tag,
-  Tile,
-} from '@carbon/react'
-import {
-  ArrowRight,
-  Book,
-  Education,
-  Email,
-  Location,
-  UserMultiple,
-} from '@carbon/icons-react'
+  ArrowRight, BookOpen, GraduationCap, Mail,
+  Users, Sparkles, Compass, TrendingUp, PlaneTakeoff, Music,
+} from 'lucide-react'
 
-const portraitUrl =
-  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hanif%20miah.jpg-UatRj82x9LnzJVh1wumtvGEyCXvb3N.png'
 
-const researchAreas = [
-  ['Gender & Development', 'Gender relations, social inequality, and the lived experiences of communities.'],
-  ['Gender & Culture', 'Bengal culture, Baul traditions, and the social dimensions of cultural practice.'],
-  ['Research Methodology', 'Qualitative, ethnographic, participatory, and community-based approaches.'],
-  ['Sociology of Development', 'The social, economic, and cultural dimensions of development in Bangladesh.'],
-  ['Migration', 'Migration and its relationship with social and economic transformation.'],
-  ['Bengal Culture & Folk Music', 'Bengali folk culture, music, Baul traditions, and their social dimensions.'],
-]
-
-const courses = [
-  'Introduction to Sociology',
-  'Social Statistics',
-  'Bangladesh Studies',
-  'Bangladesh: Economy, Society and Culture',
-  'Gender Relations and Feminism',
-  'Background of Sociological Theory',
-  'Modern Sociological Theory',
-  'Comparative Social Structure and Development',
-  'Rural and Urban Sociology',
-]
-
-const publications = [
-  {
-    title: 'প্রজন্ম ও প্রজন্মান্তরে বাংলাদেশের বাউলঃ তত্ত্ব ও বাস্তবতা',
-    detail: 'ইতিহাস প্রবন্ধমালা · ইতিহাস একাডেমী, ঢাকা · 2018 · Pages 255–262',
-  },
-  {
-    title: 'বিশ্বায়ন ও বাংলাদেশের পরিবর্তনশীল লোকসংস্কৃতিঃ একটি তাত্ত্বিক ও প্রয়োগিক বিশ্লেষণ',
-    detail: 'Hanif Miah & Shamima Sultana · সন্ধানঃ সাহিত্য-সমাজ-সংস্কৃতি বিষয়ক গবেষণা পত্রিকা · 2017 · Pages 29–51',
-  },
-]
-
-function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
-  return (
-    <div className="section-heading">
-      <span className="section-heading__eyebrow">{eyebrow}</span>
-      <h2>{title}</h2>
-    </div>
-  )
+/* Map icon name strings to components */
+const iconMap: Record<string, React.ReactNode> = {
+  Users:      <Users      size={18} aria-hidden="true" />,
+  Sparkles:   <Sparkles   size={18} aria-hidden="true" />,
+  Compass:    <Compass    size={18} aria-hidden="true" />,
+  TrendingUp: <TrendingUp size={18} aria-hidden="true" />,
+  PlaneTakeoff: <PlaneTakeoff size={18} aria-hidden="true" />,
+  Music:      <Music      size={18} aria-hidden="true" />,
 }
 
-export default function Page() {
+export default function HomePage() {
   return (
-    <main id="main-content" className="page-main profile-page">
-      <section className="profile-hero" aria-labelledby="profile-title">
-        <Grid className="profile-hero__grid">
-          <Column sm={4} md={3} lg={4}>
-            <div className="profile-portrait-wrap">
-              <img className="profile-portrait" src={portraitUrl} alt="Dr. Hanif Miah, Associate Professor of Sociology" />
-            </div>
-          </Column>
-          <Column sm={4} md={5} lg={8}>
-            <div className="profile-hero__copy">
-              <p className="eyebrow">Faculty profile · University of Chittagong</p>
-              <h1 id="profile-title">Dr. Hanif Miah</h1>
-              <p className="profile-hero__role">Associate Professor of Sociology</p>
-              <p className="profile-hero__lede">Exploring gender, culture, development, and social change in Bangladesh through engaged, community-centered research.</p>
-              <div className="profile-actions">
-                <Button href="#research" renderIcon={ArrowRight}>Explore research</Button>
-                <Button href="#contact" kind="tertiary" renderIcon={Email}>Get in touch</Button>
+    <div>
+      {/* ====================================================================
+          HERO
+          ==================================================================== */}
+      <section className="hero" aria-labelledby="hero-heading">
+        <div className="container">
+          <div className="hero-grid">
+            {/* Left: text */}
+            <div>
+              <p className="hero-affiliation" aria-label="Academic affiliation">
+                Faculty of Social Sciences · University of Chittagong, Bangladesh
+              </p>
+
+              <h1 id="hero-heading" className="hero-name">
+                Dr. Hanif<br />
+                <em>Miah</em>
+              </h1>
+
+              <p className="hero-title">{facultyData.title}</p>
+
+              <p className="hero-intro">
+                {facultyData.bioExcerpt}
+              </p>
+
+              {/* Research discipline tags */}
+              <div className="hero-tags" aria-label="Research disciplines">
+                {facultyData.coreFocus.map((f) => (
+                  <span key={f} className="hero-tag">{f}</span>
+                ))}
+              </div>
+
+              {/* CTAs */}
+              <div className="hero-actions">
+                <a href="#research" className="btn btn-primary">
+                  View Research
+                  <ArrowRight size={15} aria-hidden="true" />
+                </a>
+                <a href="#publications" className="btn btn-outline">
+                  View Publications
+                </a>
+                <Link href="/about" className="btn btn-ghost">
+                  Academic Profile
+                </Link>
+                <Link href="/contact" className="btn btn-ghost">
+                  <Mail size={14} aria-hidden="true" />
+                  Contact
+                </Link>
               </div>
             </div>
-          </Column>
-        </Grid>
+
+            {/* Right: portrait */}
+            <div className="hero-portrait-col">
+              <div className="hero-portrait-wrap">
+                <img
+                  src={facultyData.portraitUrl}
+                  alt="Dr. Hanif Miah, Associate Professor of Sociology at the University of Chittagong, Bangladesh"
+                  className="hero-portrait-img"
+                  loading="eager"
+                  fetchPriority="high"
+                />
+                <div className="hero-portrait-caption">
+                  <span className="hero-portrait-label">
+                    Associate Professor · Dept. of Sociology
+                  </span>
+                  <span
+                    style={{
+                      fontSize: '0.68rem',
+                      color: 'var(--steel)',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    CU, Bangladesh
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Academic highlights strip */}
+          <div className="hero-strip" aria-label="Academic credentials at a glance">
+            <div className="hero-stat">
+              <div className="hero-stat-value">Ph.D.</div>
+              <div className="hero-stat-label">Central China Normal University · 2019</div>
+            </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value">20+ Yrs</div>
+              <div className="hero-stat-label">Teaching & Field Research Experience</div>
+            </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value">9+</div>
+              <div className="hero-stat-label">University Courses Across 3 Degree Levels</div>
+            </div>
+            <div className="hero-stat">
+              <div className="hero-stat-value">14</div>
+              <div className="hero-stat-label">Research Themes · 3 International Conferences</div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section className="intro-section" aria-labelledby="about-title">
-        <Grid>
-          <Column sm={4} md={2} lg={4}>
-            <p className="section-kicker">01 / About</p>
-          </Column>
-          <Column sm={4} md={6} lg={8}>
-            <h2 id="about-title" className="intro-title">Understanding society through culture, participation, and lived experience.</h2>
-            <p className="intro-copy">Dr. Hanif Miah is an Associate Professor in the Department of Sociology at the University of Chittagong, Bangladesh. His academic and research experience focuses on the socio-economic and cultural dimensions of Bangladeshi society, with particular interests in gender, culture, development, migration, and research methodology.</p>
-            <p className="intro-copy">His work draws on holistic ethnography, Participatory Rural Appraisal, Focus Group Discussions, in-depth interviews, mapping, and baseline surveys to understand communities and support meaningful social change.</p>
-          </Column>
-        </Grid>
-      </section>
+      {/* ====================================================================
+          ABOUT INTRODUCTION
+          ==================================================================== */}
+      <section className="section section--white" id="about" aria-labelledby="about-heading">
+        <div className="container">
+          <div className="section-header">
+            <p className="t-eyebrow">Academic Biography</p>
+            <h2 id="about-heading" className="t-h2" style={{ maxWidth: '46ch', marginBottom: '0' }}>
+              Understanding society through culture,<br />
+              participation, and lived experience.
+            </h2>
+          </div>
 
-      <section id="research" className="content-section" aria-labelledby="research-title">
-        <Grid>
-          <Column sm={4} md={8} lg={12}><SectionHeading eyebrow="02 / Focus areas" title="Research interests" /></Column>
-          {researchAreas.map(([title, text], index) => (
-            <Column key={title} sm={4} md={4} lg={4}>
-              <Tile className="research-card">
-                <span className="research-card__number">0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </Tile>
-            </Column>
-          ))}
-        </Grid>
-      </section>
+          <div className="about-grid">
+            {/* Main biography */}
+            <div>
+              {facultyData.fullBio.map((para, i) => (
+                <p
+                  key={i}
+                  className="t-body reading-width"
+                  style={{ marginBottom: i < facultyData.fullBio.length - 1 ? '20px' : '32px' }}
+                >
+                  {para}
+                </p>
+              ))}
+              <Link href="/about" className="btn btn-outline btn-sm">
+                Full Academic Profile
+                <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+            </div>
 
-      <section className="band-section" aria-labelledby="expertise-title">
-        <Grid>
-          <Column sm={4} md={3} lg={4}><SectionHeading eyebrow="03 / Approach" title="Research expertise" /></Column>
-          <Column sm={4} md={5} lg={8}>
-            <div className="expertise-list" id="expertise-title">
-              {['Holistic ethnographic research', 'Participatory Rural Appraisal (PRA)', 'Focus Group Discussion (FGD)', 'In-depth interview', 'Mapping & community assessment', 'Baseline survey'].map((item, index) => (
-                <div className="expertise-item" key={item}><span>0{index + 1}</span><h3>{item}</h3></div>
+            {/* Vertical rule */}
+            <div className="about-divider" aria-hidden="true" />
+
+            {/* Research framework panel */}
+            <div className="about-framework">
+              <p className="t-eyebrow t-eyebrow--muted" style={{ marginBottom: '20px' }}>
+                Fieldwork & Methodological Framework
+              </p>
+              {facultyData.researchMethods.map((m, i) => (
+                <div key={m.name} className="about-method">
+                  <span className="about-method-num">0{i + 1}</span>
+                  <div>
+                    <div className="about-method-name">{m.name}</div>
+                    <div className="about-method-desc">{m.description}</div>
+                  </div>
+                </div>
               ))}
             </div>
-          </Column>
-        </Grid>
+          </div>
+        </div>
       </section>
 
-      <section id="publications" className="content-section" aria-labelledby="publications-title">
-        <Grid>
-          <Column sm={4} md={3} lg={4}><SectionHeading eyebrow="04 / Scholarship" title="Selected publications" /></Column>
-          <Column sm={4} md={5} lg={8}>
-            <div className="publication-list" id="publications-title">
-              {publications.map((publication) => <article className="publication-item" key={publication.title}><Book size={20} /><div><h3>{publication.title}</h3><p>{publication.detail}</p></div></article>)}
+      {/* ====================================================================
+          RESEARCH INTERESTS
+          ==================================================================== */}
+      <section className="section" id="research" aria-labelledby="research-heading">
+        <div className="container">
+          <div className="section-header-split">
+            <div>
+              <p className="t-eyebrow">Academic Inquiry</p>
+              <h2 id="research-heading" className="t-h2" style={{ marginBottom: '0' }}>
+                Research Interests
+              </h2>
             </div>
-            <Button kind="ghost" href="#contact" renderIcon={ArrowRight}>Discuss the research</Button>
-          </Column>
-        </Grid>
+            <Link href="/about#themes" className="btn btn-ghost btn-sm">
+              All 14 Research Themes <ArrowRight size={13} aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="research-index" role="list" aria-label="Research interest areas">
+            {facultyData.researchInterests.map((interest, idx) => (
+              <div key={interest.id} className="research-entry" role="listitem">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+                  <span className="research-num">0{idx + 1}</span>
+                  <span className="research-cat">{interest.category}</span>
+                </div>
+                <div
+                  style={{ color: 'var(--cobalt)', marginBottom: '10px' }}
+                  aria-hidden="true"
+                >
+                  {iconMap[interest.iconName] ?? <Compass size={18} />}
+                </div>
+                <h3 className="research-entry-title">{interest.title}</h3>
+                <p className="research-entry-desc">{interest.description}</p>
+                <span className="research-arrow" aria-hidden="true">
+                  Explore <ArrowRight size={12} />
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section className="content-section courses-section" aria-labelledby="teaching-title">
-        <Grid>
-          <Column sm={4} md={3} lg={4}><SectionHeading eyebrow="05 / Teaching" title="Courses taught" /></Column>
-          <Column sm={4} md={5} lg={8}>
-            <p className="section-lede">Teaching sociology as a way to read the world with curiosity, evidence, and empathy.</p>
-            <div className="tag-row">{courses.map((course) => <Tag key={course} type="cool-gray">{course}</Tag>)}</div>
-          </Column>
-        </Grid>
-      </section>
-
-      <section className="journey-section" aria-labelledby="journey-title">
-        <Grid>
-          <Column sm={4} md={3} lg={4}><SectionHeading eyebrow="06 / Academic journey" title="Education & experience" /></Column>
-          <Column sm={4} md={5} lg={8}>
-            <div className="journey-list" id="journey-title">
-              <article><Education size={24} /><div><p className="journey-year">2015—2019</p><h3>Ph.D. in Sociology</h3><p>Central China Normal University · Wuhan, Hubei, China</p><small>Gender Relation in Baul Culture of Bangladesh: Reconciling Feminist Perspectives</small></div></article>
-              <article><Education size={24} /><div><p className="journey-year">1999—2004</p><h3>M.S.S. & B.S.S. (Honours) in Sociology</h3><p>University of Chittagong · Chittagong, Bangladesh</p></div></article>
-              <article><UserMultiple size={24} /><div><p className="journey-year">July 2019—June 2020</p><h3>Assistant Proctor</h3><p>University of Chittagong</p></div></article>
+      {/* ====================================================================
+          PUBLICATIONS
+          ==================================================================== */}
+      <section className="section section--mist" id="publications" aria-labelledby="pub-heading">
+        <div className="container">
+          <div className="section-header-split">
+            <div>
+              <p className="t-eyebrow">Scholarship</p>
+              <h2 id="pub-heading" className="t-h2" style={{ marginBottom: '0' }}>
+                Publications & Conferences
+              </h2>
             </div>
-          </Column>
-        </Grid>
+            <Link href="/about" className="btn btn-ghost btn-sm">
+              Full Academic Record <ArrowRight size={13} aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px 64px' }}>
+            {/* Peer-reviewed */}
+            <div>
+              <div className="pub-section-heading">
+                <BookOpen size={16} aria-hidden="true" />
+                <span className="pub-section-label">Peer-Reviewed Publications</span>
+              </div>
+
+              {facultyData.publications.map((pub) => (
+                <article key={pub.id} className="pub-entry">
+                  <div>
+                    <div className="pub-year">{pub.year}</div>
+                  </div>
+                  <div>
+                    <div className="pub-type">
+                      {pub.type === 'book-chapter' ? 'Book Chapter' : 'Journal Article'} · {pub.language}
+                    </div>
+                    <h3 className="pub-title">{pub.title}</h3>
+                    <p className="pub-authors">{pub.author}</p>
+                    <p className="pub-venue">{pub.venue}</p>
+                    <p className="pub-pages">
+                      {pub.publisher ? `${pub.publisher} · ` : ''}{pub.location} · pp. {pub.pages}
+                    </p>
+                    {pub.abstract && (
+                      <p className="pub-abstract">{pub.abstract}</p>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {/* Conferences */}
+            <div>
+              <div className="pub-section-heading">
+                <GraduationCap size={16} aria-hidden="true" />
+                <span className="pub-section-label">Conference & Research Seminars</span>
+              </div>
+
+              {facultyData.conferences.map((conf) => (
+                <article key={conf.id} className="conf-entry">
+                  <div>
+                    <div className="pub-year">{conf.year}</div>
+                  </div>
+                  <div>
+                    <span className="conf-scope">{conf.scope}</span>
+                    <h3 className="conf-title">{conf.title}</h3>
+                    <p className="conf-event">{conf.event}</p>
+                    <p className="conf-meta">
+                      {conf.organizerOrVenue} · {conf.location}
+                      {conf.pages ? ` · pp. ${conf.pages}` : ''}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section id="contact" className="contact-section" aria-labelledby="contact-title">
-        <Grid>
-          <Column sm={4} md={8} lg={8}><p className="section-kicker">07 / Connect</p><h2 id="contact-title">Let&apos;s build knowledge together.</h2><p>For academic communication, teaching, scholarly discussion, and research collaboration.</p></Column>
-          <Column sm={4} md={8} lg={4}><div className="contact-card"><p><Email size={20} /> miah.hanif@cu.ac.bd</p><p><Location size={20} /> Department of Sociology, University of Chittagong</p><Button href="mailto:miah.hanif@cu.ac.bd" renderIcon={ArrowRight}>Send an email</Button></div></Column>
-        </Grid>
+      {/* ====================================================================
+          TEACHING HIGHLIGHTS
+          ==================================================================== */}
+      <section className="section section--white" id="teaching" aria-labelledby="teaching-heading">
+        <div className="container">
+          <div className="section-header-split">
+            <div>
+              <p className="t-eyebrow">Academic Instruction</p>
+              <h2 id="teaching-heading" className="t-h2" style={{ marginBottom: '0' }}>
+                Teaching & Curriculum
+              </h2>
+            </div>
+            <Link href="/about#teaching" className="btn btn-ghost btn-sm">
+              All 9 Courses <ArrowRight size={13} aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="courses-grid" role="list" aria-label="University courses">
+            {facultyData.courses.slice(0, 6).map((course) => (
+              <div key={course.code} className="course-item" role="listitem">
+                <div className="course-code">{course.code}</div>
+                <div className="course-level">{course.level}</div>
+                <h3 className="course-title">{course.name}</h3>
+                <p className="course-desc">{course.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <footer className="profile-footer"><Grid><Column sm={4} md={8} lg={8}><strong>Dr. Hanif Miah</strong><span>Associate Professor of Sociology · University of Chittagong</span></Column><Column sm={4} md={8} lg={4}><span className="footer-meta">© {new Date().getFullYear()} Dr. Hanif Miah</span></Column></Grid></footer>
-    </main>
+    </div>
   )
 }
