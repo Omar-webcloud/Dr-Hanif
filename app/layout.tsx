@@ -127,7 +127,10 @@ export const metadata: Metadata = {
     ICBM: '22.4716, 91.7877',
   },
   verification: {
-    google: 'rFFlsMVXMOTWg6H0_zw9h7xy0TP_4pK0Hmwixt9Gzzo',
+    google: [
+      'rFFlsMVXMOTWg6H0_zw9h7xy0TP_4pK0Hmwixt9Gzzo', // Account 1
+      'pb8XjvfpEFfO1gmTd56XbBkQ_q-5itluHzClplcnwfM', // Account 2
+    ],
   },
 }
 
